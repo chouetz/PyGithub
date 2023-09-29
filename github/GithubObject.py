@@ -296,11 +296,12 @@ class GithubObject:
         return self._headers.get(Consts.RES_ETAG)  # type: ignore
 
     @property
-    def last_modified(self) -> Optional[str]:
+    def last_modified(self) -> Optional[datetime]:
         """
-        :type: str
+        :type: datetime
         """
-        return self._headers.get(Consts.RES_LAST_MODIFIED)  # type: ignore
+        date_format = "%a, %d %b %Y %H:%M:%S GMT"
+        return datetime.strptime(self._headers.get(Consts.RES_LAST_MODIFIED))  # type: ignore
 
     def get__repr__(self, params: Dict[str, Any]) -> str:
         """
